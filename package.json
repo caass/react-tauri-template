@@ -1,8 +1,9 @@
 {
-  "name": "blah",
+  "name": "tauri-react-template",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@tauri-apps/api": "^1.0.0-beta.8",
     "@testing-library/jest-dom": "^5.11.4",
     "@testing-library/react": "^11.1.0",
     "@testing-library/user-event": "^12.1.10",
@@ -17,9 +18,15 @@
     "web-vitals": "^1.0.1"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
+    "start": "BROWSER=none FORCE_COLOR=1 run-p -rnl start:*",
+    "start:react": "react-scripts start",
+    "start:devtools": "react-devtools",
+    "start:tauri": "tauri dev",
+    "build": "FORCE_COLOR=1 run-s -nl build:react build:tauri",
+    "build:react": "react-scripts build",
+    "build:tauri": "tauri build",
+    "test:react": "react-scripts test",
+    "test:tauri": "cd src-tauri && cargo test",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
@@ -39,5 +46,10 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "@tauri-apps/cli": "^1.0.0-beta.10",
+    "npm-run-all": "^4.1.5",
+    "react-devtools": "^4.19.2"
   }
 }
